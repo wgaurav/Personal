@@ -32,8 +32,8 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/"          element={<GalleryPage />} />
-        <Route path="/toast"     element={<ToastDemo />}   />
-        <Route path="/card-demo" element={<CardDemo />}    />
+        <Route path="/toast"     element={<ToastDemo />}        />
+        <Route path="/card-demo" element={<CardDemo />}         />
       </Routes>
     </BrowserRouter>
   )
