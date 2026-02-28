@@ -16,9 +16,14 @@ const CARD_H = 288
 const FOCUSED_W = 360
 const FOCUSED_H = 464
 
-/* Tight cluster positions (x from container center) for the 4 non-focused cards */
-const CLUSTER_XS = [-30, -10, 10, 30]
-const CLUSTER_Y  = 220
+/* Diagonal cascade positions for the 4 non-focused cards when one is focused */
+const CLUSTER_OFFSETS = [
+  { x: -60, y:   0 },
+  { x: -20, y:  20 },
+  { x:  20, y:  40 },
+  { x:  60, y:  60 },
+]
+const CLUSTER_BASE_Y = 210
 
 const spring = { type: 'spring' as const, visualDuration: 0.4, bounce: 0.15 }
 
@@ -57,13 +62,13 @@ export default function CardDemo() {
           const tx = isFocused
             ? -(FOCUSED_W / 2)
             : otherFocused
-              ? CLUSTER_XS[clusterIdx] - CARD_W / 2
+              ? CLUSTER_OFFSETS[clusterIdx].x - CARD_W / 2
               : card.x - CARD_W / 2
 
           const ty = isFocused
             ? -(FOCUSED_H / 2)
             : otherFocused
-              ? CLUSTER_Y - CARD_H / 2
+              ? CLUSTER_BASE_Y + CLUSTER_OFFSETS[clusterIdx].y - CARD_H / 2
               : card.y - CARD_H / 2
 
           return (
@@ -77,7 +82,7 @@ export default function CardDemo() {
               animate={{
                 x:      tx,
                 y:      ty,
-                rotate: isFocused ? 0 : card.rotate,
+                rotate: isFocused ? 0 : otherFocused ? card.rotate * 0.3 : card.rotate,
                 scale:  otherFocused ? 0.7 : 1,
                 width:  isFocused ? FOCUSED_W : CARD_W,
                 height: isFocused ? FOCUSED_H : CARD_H,

@@ -51,15 +51,14 @@ const cardVariants = {
     transition: { ...SPRING, delay: TIMING.firstCard + i * TIMING.cardStagger },
   }),
   hover: {
-    y: -6,
-    backgroundColor: '#18182a',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.45)',
+    y: -4,
+    boxShadow: '5px 5px 0px #000',
   },
 }
 
 const arrowVariants = {
-  visible: { x: 0, opacity: 0.35 },
-  hover:   { x: 6, opacity: 1    },
+  visible: { x: 0, opacity: 0.4 },
+  hover:   { x: 6, opacity: 1   },
 }
 
 /* ── Component ─────────────────────────────────────────── */
@@ -77,6 +76,7 @@ export default function GalleryPage() {
         transition={{ ...SPRING, delay: TIMING.heading }}
       >
         <h1 style={styles.heading}>Interactions</h1>
+        <div style={styles.divider} />
         <p style={styles.tagline}>A growing collection of polished UI interactions.</p>
       </motion.div>
 
@@ -94,9 +94,6 @@ export default function GalleryPage() {
             style={styles.card}
             onClick={() => navigate(item.path)}
           >
-            {/* Accent bar */}
-            <div style={{ ...styles.accentBar, background: item.accent }} />
-
             {/* Index */}
             <span style={styles.index}>{String(i + 1).padStart(2, '0')}</span>
 
@@ -124,9 +121,9 @@ export default function GalleryPage() {
 const styles: Record<string, React.CSSProperties> = {
   page: {
     minHeight: '100vh',
-    background: '#0a0a0f',
+    background: '#ffffff',
     padding: '80px 40px',
-    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: '"Patrick Hand", sans-serif',
     boxSizing: 'border-box',
   },
   header: {
@@ -135,68 +132,69 @@ const styles: Record<string, React.CSSProperties> = {
     textAlign: 'center',
   },
   heading: {
-    margin: '0 0 12px',
-    fontSize: 40,
+    margin: '0 0 14px',
+    fontSize: 44,
     fontWeight: 700,
-    letterSpacing: '-0.03em',
-    color: '#ffffff',
+    letterSpacing: '0.04em',
+    textTransform: 'uppercase',
+    color: '#000000',
+  },
+  divider: {
+    width: '100%',
+    height: 2,
+    background: '#000',
+    margin: '0 0 16px',
   },
   tagline: {
     margin: 0,
     fontSize: 16,
-    color: '#6b7280',
-    letterSpacing: '-0.01em',
+    color: '#555',
+    letterSpacing: '0.01em',
   },
   grid: {
     maxWidth: 720,
     margin: '0 auto',
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-    gap: 16,
+    gap: 20,
   },
   card: {
     position: 'relative',
-    backgroundColor: '#13131a',
-    border: '1px solid rgba(255,255,255,0.07)',
-    borderRadius: 16,
+    backgroundColor: '#ffffff',
+    border: '2px solid #000',
+    borderRadius: 4,
     padding: '28px 28px 24px',
     cursor: 'pointer',
-    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     gap: 8,
-    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-  },
-  accentBar: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 3,
+    boxShadow: '3px 3px 0px #000',
   },
   index: {
     fontSize: 12,
     fontWeight: 600,
-    letterSpacing: '0.08em',
-    color: '#374151',
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
+    color: '#aaa',
   },
   title: {
     margin: '4px 0 0',
     fontSize: 20,
-    fontWeight: 600,
-    letterSpacing: '-0.02em',
-    color: '#f9fafb',
+    fontWeight: 700,
+    letterSpacing: '0.02em',
+    textTransform: 'uppercase',
+    color: '#000',
   },
   description: {
     margin: 0,
     fontSize: 14,
     lineHeight: 1.6,
-    color: '#6b7280',
+    color: '#555',
   },
   arrow: {
     marginTop: 8,
     fontSize: 18,
     display: 'inline-block',
-    color: '#9ca3af',
+    color: '#000',
   },
 }
