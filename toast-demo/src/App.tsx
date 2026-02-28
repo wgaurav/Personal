@@ -1,22 +1,23 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { DialRoot } from 'dialkit'
 import 'dialkit/styles.css'
 import { NotificationToast } from './NotificationToast'
+import CardDemo from './CardDemo'
+import GalleryPage from './GalleryPage'
 
-export default function App() {
+function ToastDemo() {
   const [replay, setReplay] = useState(0)
 
   return (
     <div style={styles.page}>
-      {/* DialKit panel — top-right corner */}
       <DialRoot position="top-right" />
+      <Link to="/" style={styles.backLink}>← All interactions</Link>
 
-      {/* Demo canvas */}
       <div style={styles.canvas}>
         <NotificationToast replayTrigger={replay} />
       </div>
 
-      {/* Replay button */}
       <button style={styles.replayBtn} onClick={() => setReplay(n => n + 1)}>
         Replay toast
       </button>
@@ -26,8 +27,21 @@ export default function App() {
   )
 }
 
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/"          element={<GalleryPage />} />
+        <Route path="/toast"     element={<ToastDemo />}   />
+        <Route path="/card-demo" element={<CardDemo />}    />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
 const styles: Record<string, React.CSSProperties> = {
   page: {
+    position: 'relative',
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
@@ -36,6 +50,15 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 24,
     background: '#f3f4f6',
     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+  },
+  backLink: {
+    position: 'absolute',
+    top: 24,
+    left: 24,
+    fontSize: 13,
+    fontWeight: 500,
+    color: '#6b7280',
+    textDecoration: 'none',
   },
   canvas: {
     display: 'flex',
